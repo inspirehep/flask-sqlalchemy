@@ -66,6 +66,15 @@ class NameMetaMixin(object):
 
         super(NameMetaMixin, cls).__init__(name, bases, d)
 
+        # __table_cls__ has run at this point
+        # if no table was created, use the parent table
+        if (
+            '__tablename__' not in cls.__dict__
+            and '__table__' in cls.__dict__
+            and cls.__dict__['__table__'] is None
+        ):
+            del cls.__table__
+
     def __table_cls__(cls, *args, **kwargs):
         """This is called by SQLAlchemy during mapper setup. It determines the
         final table object that the model will use.
@@ -139,7 +148,7 @@ class Model(object):
     def __repr__(self):
         identity = inspect(self).identity
         if identity is None:
-            pk = "(transient {0})".format(id(self))
+            pk = "(transient {})".format(id(self))
         else:
             pk = ', '.join(to_str(value) for value in identity)
-        return '<{0} {1}>'.format(type(self).__name__, pk)
+        return '<{} {}>'.format(type(self).__name__, pk)
