@@ -1,7 +1,61 @@
+Version 2.5.1
+-------------
+
+Released 2021-03-18
+
+-   Fix compatibility with Python 2.7.
+
+
+Version 2.5.0
+-------------
+
+Released 2021-03-18
+
+-   Update to support SQLAlchemy 1.4.
+-   SQLAlchemy ``URL`` objects are immutable. Some internal methods have
+    changed to return a new URL instead of ``None``. :issue:`885`
+
+
+Version 2.4.4
+-------------
+
+Released 2020-07-14
+
+-   Change base class of meta mixins to ``type``. This fixes an issue
+    caused by a regression in CPython 3.8.4. :issue:`852`
+
+
+Version 2.4.3
+-------------
+
+Released 2020-05-26
+
+-   Deprecate ``SQLALCHEMY_COMMIT_ON_TEARDOWN`` as it can cause various
+    design issues that are difficult to debug. Call
+    ``db.session.commit()`` directly instead. :issue:`216`
+
+
+Version 2.4.2
+-------------
+
+Released 2020-05-25
+
+-   Fix bad pagination when records are de-duped. :pr:`812`
+
+
+Version 2.4.1
+-------------
+
+Released 2019-09-24
+
+-   Fix ``AttributeError`` when using multiple binds with polymorphic
+    models. :pr:`651`
+
+
 Version 2.4.0
 -------------
 
-Released 2019-04-23
+Released 2019-04-24
 
 -   Make engine configuration more flexible. (:pr:`684`)
 -   Address SQLAlchemy 1.3 deprecations. (:pr:`684`)
