@@ -29,6 +29,14 @@ setup(
     include_package_data=True,
     python_requires=">= 2.7, != 3.0.*, != 3.1.*, != 3.2.*, != 3.3.*",
     install_requires=["Flask>=0.10", "SQLAlchemy<2.0"],
+    extras_require={
+        "tests": [
+            "pytest",
+            "coverage",
+            "blinker",
+            "mock"
+        ]
+    },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
