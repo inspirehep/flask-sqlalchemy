@@ -1,3 +1,5 @@
+
+import warnings
 import flask
 
 import flask_sqlalchemy as fsa
@@ -53,9 +55,11 @@ def test_helper_api(db):
 
 def test_persist_selectable(app, db, Todo, recwarn):
     """ In SA 1.3, mapper.mapped_table should be replaced with mapper.persist_selectable """
-    with app.test_request_context():
-        todo = Todo('Test 1', 'test')
-        db.session.add(todo)
-        db.session.commit()
+    with warnings.catch_warnings():
+        warnings.filterwarnings("ignore", category=DeprecationWarning)
+        with app.test_request_context():
+            todo = Todo('Test 1', 'test')
+            db.session.add(todo)
+            db.session.commit()
 
-    assert len(recwarn) == 0
+        assert len(recwarn) == 0
